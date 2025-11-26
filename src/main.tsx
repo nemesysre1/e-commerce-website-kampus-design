@@ -1,32 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+
 import App from "./App";
 import AdminApp from "./admin/AdminApp";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthProvider, useAuth } from "./context/AuthContext";
+import { AuthProvider } from "./context/AuthContext";
+
 import "./index.css";
 
-function BuyerRoute() {
-  return <App />;
-}
+const root = document.getElementById("root") as HTMLElement;
 
-function SellerRoute() {
-  const { isSeller } = useAuth();
-
-  if (!isSeller) {
-    return <div>Akses ditolak (bukan penjual)</div>;
-  }
-
-  return <AdminApp />;
-}
-
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <AuthProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/*" element={<BuyerRoute />} />
-        <Route path="/admin/*" element={<SellerRoute />} />
-      </Routes>
-    </BrowserRouter>
-  </AuthProvider>
+ReactDOM.createRoot(root).render(
+  <React.StrictMode>
+    <AuthProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </AuthProvider>
+  </React.StrictMode>
 );

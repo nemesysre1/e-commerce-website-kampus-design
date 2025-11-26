@@ -1,15 +1,16 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+// src/context/AuthContext.tsx
+import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
-interface User {
+export interface User {
   id: string;
   name: string;
-  email: string;
+  email?: string;
   userType: "buyer" | "seller";
 }
 
 interface AuthContextType {
   user: User | null;
-  login: (u: User) => void;
+  login: (userData: User, token?: string) => void;
   logout: () => void;
   isSeller: boolean;
   isBuyer: boolean;
@@ -21,19 +22,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const u = localStorage.getItem("user");
-    if (u) setUser(JSON.parse(u));
+    const saved = localStorage.getItem("user");
+    if (saved) {
+      try {
+        setUser(JSON.parse(saved));
+      } catch {
+        localStorage.removeItem("user");
+      }
+    }
   }, []);
 
-  const login = (u: User) => {
-    setUser(u);
-    localStorage.setItem("user", JSON.stringify(u));
+  const login = (userData: User, token?: string) => {
+    setUser(userData);
+    localStorage.setItem("user", JSON.stringify(userData));
+    if (token) localStorage.setItem("token", token);
   };
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");
     localStorage.removeItem("token");
+    // redirect to homepage after logout
+    window.location.href = "/";
   };
 
   return (

@@ -8,7 +8,7 @@ import DashboardHome from "./pages/DashboardHome";
 import Products from "./pages/Products";
 import AddProduct from "./pages/AddProduct";
 import EditProduct from "./pages/EditProduct";
-import Orders from "./pages/Orders";
+import {Orders} from "./pages/Orders";
 import Settings from "./pages/Settings";
 
 export default function AdminApp() {
