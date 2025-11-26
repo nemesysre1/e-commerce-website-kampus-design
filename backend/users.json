@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "jeremiahiskia",
+    "email": "nemesysre1st@gmail.com",
+    "password": "jeremiahiskia",
+    "role": "seller"
+  },
+  {
+    "id": 2,
+    "name": "irjachai",
+    "email": "irjachai@gmail.com",
+    "password": "123456",
+    "role": "buyer"
+  }
+]
