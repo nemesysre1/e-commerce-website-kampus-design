@@ -477,7 +477,7 @@ export default function App() {
 
   const cartItemCount = cartItems.reduce((s, i) => s + i.quantity, 0);
   const promoProducts = mockProducts.filter((p) => p.originalPrice);
-
+  
   return (
     <Routes>
       {/* Admin Dashboard */}
